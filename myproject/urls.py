@@ -24,12 +24,13 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     path('accounts/', include('allauth.urls')),
     path('', views.PostList.as_view(), name='product_list'),
-    path('product/<int:pk>/', views.product_list, name='product_list'),
+    path('product/<int:pk>/', views.view_cart, name='product_list'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
     path('add_to_cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
     path('cart/', views.view_cart, name='cart'),
+    
 ]
 
 
