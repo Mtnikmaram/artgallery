@@ -3,8 +3,7 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Post
 from .forms import CommentForm
-from .models import Cart, CartItem
-from .forms import CartItemForm
+
 
 class PostList(generic.ListView):
     model = Post
@@ -79,31 +78,8 @@ class PostLike(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
   
     
-def add_to_cart(request, product_id):
-    product = get_object_or_404(Product, pk=product_id)
-    cart, created = Cart.objects.get_or_create(user=request.user)
-    
-    if request.method == 'POST':
-        form = CartItemForm(request.POST)
-        if form.is_valid():
-            quantity = form.cleaned_data['quantity']
-            item, created = CartItem.objects.get_or_create(cart=cart, product=product)
-            item.quantity += quantity
-            item.save()
-            return redirect('cart')
-    else:
-        form = CartItemForm()
 
-    return render(request, 'add_to_cart.html', {'product': product, 'form': form})
 
-def view_cart(request):
-    cart, created = Cart.objects.get_or_create(user=request.user)
-    cart_items = cart.cartitem_set.all()
-    return render(request, 'view_cart.html', {'cart': cart, 'cart_items': cart_items})
-
-def product_list(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    return render(request, 'product_list.html', {'product': product})
 
 def register(request):
     return render(request, 'register.html')
@@ -113,3 +89,6 @@ def user_login(request):
 
 def user_logout(request):
     return render(request, 'logout.html')
+
+
+

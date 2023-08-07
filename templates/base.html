@@ -49,15 +49,7 @@
                 
                
                 {% if user.is_authenticated %}
-                <form class="d-flex">
-                    <button class="btn btn-outline-dark" type="submit">
-                        <a href="{% url 'cart' %}" class="btn btn-primary">{{ user.cart.cartitem_set.count }}
-                        <i class="bi-cart-fill me-1"></i>
-                        Cart
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> 
-                        </a>
-                    </button>
-                </form>
+                
                 
                 {% endif %}
                 
@@ -76,7 +68,7 @@
     
     <footer class="footer mt-auto py-3 dark-bg">
         <p class="m-0 text-center text-black">created by mtnikmaram</p>
-        <p class="m-0 text-center text-black">fllow us : 
+        <p class="m-0 text-center text-black">fallow us : 
             <i class="fab fa-facebook-square ms-3"></i>
             <i class="fab fa-twitter-square ms-3"></i>
             <i class="fab fa-instagram-square ms-3"></i>
