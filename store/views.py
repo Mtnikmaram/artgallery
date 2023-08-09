@@ -76,19 +76,3 @@ class PostLike(View):
             post.likes.add(request.user)
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
-  
-    
-
-
-
-def register(request):
-    return render(request, 'register.html')
-
-def user_login(request):
-    return render(request, 'login.html')
-
-def user_logout(request):
-    return render(request, 'logout.html')
-
-
-
