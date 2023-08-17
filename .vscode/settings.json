@@ -24,5 +24,9 @@
    "workbench.colorTheme": "Abyss",
    "terminal.integrated.gpuAcceleration": "canvas",
    "editor.defaultFormatter": "HookyQR.beautify",
-   "python.linting.pycodestyleEnabled": true
+   "python.linting.pycodestyleEnabled": true,
+   "cSpell.words": [
+      "mtnikmaram",
+      "samiraroza"
+   ]
 }
