@@ -9,14 +9,16 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-from pathlib import Path
+
 import os
+from pathlib import Path
+from django.contrib.messages import constants as messages
 import dj_database_url
-if os.path.isfile('env.py'):
-     import env
+if os.path.isfile("env.py"):
+    import env
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATES_DIR = os.path.join(BASE_DIR,'templates')
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -26,31 +28,29 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 ALLOWED_HOSTS = ['127.0.0.1:8000']
 ALLOWED_HOSTS = ['art-gallery-dbb39ec83ba6.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
-
-INSTALLED_APPS = [
-    'django.contrib.admin',
+INSTALLED_APPS = [	
+    'django.contrib.admin',	
     'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'cloudinary_storage',
-    'django.contrib.staticfiles',
-    'cloudinary',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+    'django.contrib.contenttypes',	
+    'django.contrib.sessions',	
+    'django.contrib.messages',	
+    'cloudinary_storage',	
+    'django.contrib.staticfiles',	
+    'cloudinary',	
+    'crispy_forms',	
+    'allauth',	
+    'allauth.account',	
+    'allauth.socialaccount',	
     'django_summernote',
-    'crispy_forms',
-    'crispy_bootstrap4',
-    'store',
-]
+    'crispy_bootstrap4',	
+    'store',	
+]	
 
 SITE_ID = 1
 
@@ -100,8 +100,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -135,13 +133,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_STORAGE = 'cloudinary_storage.storage.staticHashedCloudinaryStorage'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+	
+MEDIA_URL = '/media/'	
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'	
+STATIC_URL = '/static/'	
+STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'	
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]	
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')	
 
-MEDIA_URL = '/media/'
-DEFULT_FILES_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
