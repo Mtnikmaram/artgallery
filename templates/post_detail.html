@@ -3,7 +3,7 @@
 
 <div class="masthead">
     <div class="container">
-        <div class="row g-0">
+        <div class="row g-2">
             <div class="col-md-6 masthead-text">
                 <!-- Post title goes in these h1 tags -->
                 <h1 class="post-title">{{ post.title }}</h1>
@@ -13,9 +13,10 @@
             <div class="d-none d-md-block col-md-6 masthead-image">
                 <!-- The featured image URL goes in the src attribute -->
                 {% if "placeholder" in post.featured_image.url %}
-                <img src="" width="100%">
+                <img src="{{ post.featured_image.url }}" width="50%" height="50%">
                 {% else %}
-                <img src=" {{ post.featured_image.url }}" width="100%">
+                <img src="{{ post.featured_image.url }}" width="50%" height="50%">
+
                 {% endif %}
             </div>
         </div>
