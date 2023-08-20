@@ -49,17 +49,17 @@
                             {{ user }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">Create New Review</a></li>
-                            <li><a class="dropdown-item" href="#">View My Reviews</a></li>
+                            <li><a class="dropdown-item" href="{% url 'create_post' %}">Create New post</a></li>
+                            <li><a class="dropdown-item" href="{% url 'view_post' %}">View My posts</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Show profile Page</a></li>
+                            <li><a class="dropdown-item" href="{% url 'show_profile' %}">Show profile Page</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             {% if request.user.is_superuser %}
-                            <li><a class="dropdown-item" href="#">Admin Area</a></li>
+                            <li><a class="dropdown-item" href="{% url 'admin_area' %}">Admin Area</a></li>
                             {% endif %}
                             <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log Out</a></li>
                     </li>

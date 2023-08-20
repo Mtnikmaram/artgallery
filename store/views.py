@@ -76,3 +76,32 @@ class PostLike(View):
             post.likes.add(request.user)
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+    
+
+
+class CreatePost(generic.ListView):
+    model = Post
+    queryset = Post.objects.filter(status=1).order_by("-created_on")
+    template_name = "create_post.html"
+    paginate_by = 6
+
+
+class ViewPost(generic.ListView):
+    model = Post
+    queryset = Post.objects.filter(status=1).order_by("-created_on")
+    template_name = "view_post.html"
+    paginate_by = 6
+
+
+class ShowProfile(generic.ListView):
+    model = Post
+    queryset = Post.objects.filter(status=1).order_by("-created_on")
+    template_name = "show_profile.html"
+    paginate_by = 6
+
+
+class AdminArea(generic.ListView):
+    model = Post
+    queryset = Post.objects.filter(status=1).order_by("-created_on")
+    template_name = "admin_area.html"
+    paginate_by = 6

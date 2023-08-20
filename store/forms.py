@@ -7,5 +7,6 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('body',)
 
+
 class CartItemForm(forms.Form):
     quantity = forms.IntegerField(min_value=1)
