@@ -1,4 +1,4 @@
-from .models import Comment
+from .models import Comment, Post
 from django import forms
 
 
@@ -8,5 +8,15 @@ class CommentForm(forms.ModelForm):
         fields = ('body',)
 
 
-class CartItemForm(forms.Form):
-    quantity = forms.IntegerField(min_value=1)
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title',
+                  'slug',
+                  'author',
+                  'content',
+                  'featured_image',
+                  'excerpt',
+                  'status',
+                  'likes',
+                  )

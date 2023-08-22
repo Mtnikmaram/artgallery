@@ -26,6 +26,9 @@
    "editor.defaultFormatter": "HookyQR.beautify",
    "python.linting.pycodestyleEnabled": true,
    "cSpell.words": [
+      "artgallery",
+      "blogpost",
+      "cloudinary",
       "mtnikmaram",
       "samiraroza"
    ]
