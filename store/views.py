@@ -1,8 +1,11 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
+from .forms import EditProfileForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from .models import Post
-from .forms import CommentForm, PostForm
+from .models import Post, User
+from .forms import CommentForm, PostForm, EditProfileForm
 
 
 class PostList(generic.ListView):
@@ -85,34 +88,83 @@ class CreatePost(generic.ListView):
     paginate_by = 6
 
 
+class CreatePostView(View):
+    def get(self, request):
+        form = PostForm()
+        return render(request, 'create_post.html', {'form': form})
+
+    def post(self, request):
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('home')
+        return render(request, 'create_post.html', {'form': form})
+
+
 class ViewPost(generic.ListView):
-    model = Post
-    queryset = Post.objects.filter(status=1).order_by("-created_on")
     template_name = "view_post.html"
     paginate_by = 6
 
+    def get_queryset(self):
+        return Post.objects.filter(author=self.request.user, status=1).order_by("-created_on")
+    
 
-class ShowProfile(generic.ListView):
-    model = Post
-    queryset = Post.objects.filter(status=1).order_by("-created_on")
-    template_name = "show_profile.html"
-    paginate_by = 6
+class UpdatePostView(View):
+    def get(self, request, slug):
+        post = get_object_or_404(Post, slug=slug, author=request.user)
+        form = PostForm(instance=post)
+        return render(request, 'update_post.html', {'form': form, 'post': post})
 
-
-class AdminArea(generic.ListView):
-    model = Post
-    queryset = Post.objects.filter(status=1).order_by("-created_on")
-    template_name = "admin_area.html"
-    paginate_by = 6
-
-
-def create_post_view(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+    def post(self, request, slug):
+        post = get_object_or_404(Post, slug=slug, author=request.user)
+        form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
-            form.instance.author = request.user
             form.save()
+            return redirect('view_post')
+        return render(request, 'update_post.html', {'form': form, 'post': post})
+
+
+class DeletePostView(View):
+    def get(self, request, slug):
+        post = get_object_or_404(Post, slug=slug, author=request.user)
+        return render(request, 'delete_post_confirm.html', {'post': post})
+
+    def post(self, request, slug):
+        post = get_object_or_404(Post, slug=slug, author=request.user)
+        post.delete()
+        return redirect('view_post')
+
+
+class EditProfileView(LoginRequiredMixin, View):
+    login_url = 'account_login'
+    template_name = 'show_profile.html'
+
+    def get(self, request):
+        edit_profile_form = EditProfileForm(instance=request.user)
+        return render(request, self.template_name, {'edit_profile_form': edit_profile_form})
+
+    def post(self, request):
+        edit_profile_form = EditProfileForm(request.POST, instance=request.user)
+        if edit_profile_form.is_valid():
+            edit_profile_form.save()
             return redirect('home')
-    else:
-        form = PostForm()
-    return render(request, 'create_post.html', {'form': form})
+        return render(request, self.template_name, {'edit_profile_form': edit_profile_form})
+
+
+@login_required
+def show_profile(request):
+    edit_profile_form = EditProfileForm(instance=request.user)
+
+    if request.method == 'POST':
+        edit_profile_form = EditProfileForm(request.POST, instance=request.user)
+        if edit_profile_form.is_valid():
+            edit_profile_form.save()
+            return redirect('home')
+
+    return render(
+        request,
+        'show_profile.html',
+        {'edit_profile_form': edit_profile_form}
+    )
