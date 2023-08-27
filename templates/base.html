@@ -58,9 +58,6 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            {% if request.user.is_superuser %}
-                            <li><a class="dropdown-item" href="{% url 'admin_area' %}">Admin Area</a></li>
-                            {% endif %}
                             <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log Out</a></li>
                     </li>
 
