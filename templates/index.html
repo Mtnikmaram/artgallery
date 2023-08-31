@@ -33,7 +33,7 @@
                                 </div>
                             </div>
                             {% if user.is_authenticated %}
-                            <a href="{% url 'post_detail' post.slug  %}" class="post-link">
+                            <a href="{% url 'post_detail' id=post.id %}" class="post-link">
                                 <h2 class="card-title">{{ post.title }}</h2>
                                 <p class="card-text">{{ post.excerpt }}</p>
                             </a>

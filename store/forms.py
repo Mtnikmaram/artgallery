@@ -12,8 +12,14 @@ class CommentForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'slug', 'content', 'featured_image', 'status',)
+        fields = ('title', 'content', 'featured_image', 'status',)
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'content': forms.Textarea(attrs={'class': 'form-control'}),
+            'featured_image': forms.FileInput(attrs={'class': 'form-control-file', 'accept': 'image/*'}),
+        }
 
+    featured_image = forms.ImageField(required=True)
 
 class EditProfileForm(forms.ModelForm):
     class Meta:

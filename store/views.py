@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.contrib import messages
 from django.views import generic, View
 from .forms import EditProfileForm
 from django.contrib.auth.decorators import login_required
@@ -17,9 +18,9 @@ class PostList(generic.ListView):
 
 class PostDetail(View):
 
-    def get(self, request, slug, *args, **kwargs):
+    def get(self, request, id, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
-        post = get_object_or_404(queryset, slug=slug)
+        post = get_object_or_404(queryset, id=id)
         comments = post.comments.filter(approved=True).order_by("-created_on")
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
@@ -37,10 +38,10 @@ class PostDetail(View):
             },
         )
 
-    def post(self, request, slug, *args, **kwargs):
+    def post(self, request, id, *args, **kwargs):
 
         queryset = Post.objects.filter(status=1)
-        post = get_object_or_404(queryset, slug=slug)
+        post = get_object_or_404(queryset, id=id)
         comments = post.comments.filter(approved=True).order_by("-created_on")
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
@@ -71,14 +72,14 @@ class PostDetail(View):
 
 class PostLike(View):
 
-    def post(self, request, slug, *args, **kwargs):
-        post = get_object_or_404(Post, slug=slug)
+    def post(self, request, id, *args, **kwargs):
+        post = get_object_or_404(Post, id=id)
         if post.likes.filter(id=request.user.id).exists():
             post.likes.remove(request.user)
         else:
             post.likes.add(request.user)
 
-        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+        return HttpResponseRedirect(reverse('post_detail', args=[id]))
 
 
 class CreatePost(generic.ListView):
@@ -99,6 +100,7 @@ class CreatePostView(View):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
+            messages.success(request, 'the post has successfully created')
             return redirect('home')
         return render(request, 'create_post.html', {'form': form})
 
@@ -112,13 +114,13 @@ class ViewPost(generic.ListView):
     
 
 class UpdatePostView(View):
-    def get(self, request, slug):
-        post = get_object_or_404(Post, slug=slug, author=request.user)
+    def get(self, request, id):
+        post = get_object_or_404(Post, id=id, author=request.user)
         form = PostForm(instance=post)
         return render(request, 'update_post.html', {'form': form, 'post': post})
 
-    def post(self, request, slug):
-        post = get_object_or_404(Post, slug=slug, author=request.user)
+    def post(self, request, id):
+        post = get_object_or_404(Post, id=id, author=request.user)
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
@@ -127,12 +129,12 @@ class UpdatePostView(View):
 
 
 class DeletePostView(View):
-    def get(self, request, slug):
-        post = get_object_or_404(Post, slug=slug, author=request.user)
+    def get(self, request, id):
+        post = get_object_or_404(Post, id=id, author=request.user)
         return render(request, 'delete_post_confirm.html', {'post': post})
 
-    def post(self, request, slug):
-        post = get_object_or_404(Post, slug=slug, author=request.user)
+    def post(self, request, id):
+        post = get_object_or_404(Post, id=id, author=request.user)
         post.delete()
         return redirect('view_post')
 
