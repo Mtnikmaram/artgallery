@@ -6,24 +6,25 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from .models import Post, User
+from django.utils.text import slugify
 from .forms import CommentForm, PostForm, EditProfileForm
 
 
 class PostList(generic.ListView):
     model = Post
-    queryset = Post.objects.filter(status=1).order_by("-created_on")
+    queryset = Post.objects.filter(status=1, approved=True).order_by("-created_on")
     template_name = "index.html"
     paginate_by = 6
 
 
 class PostDetail(View):
 
-    def get(self, request, id, *args, **kwargs):
+    def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
-        post = get_object_or_404(queryset, id=id)
+        post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("-created_on")
         liked = False
-        if post.likes.filter(id=self.request.user.id).exists():
+        if post.likes.filter(id=request.user.id).exists():
             liked = True
 
         return render(
@@ -38,13 +39,13 @@ class PostDetail(View):
             },
         )
 
-    def post(self, request, id, *args, **kwargs):
+    def post(self, request, slug, *args, **kwargs):
 
         queryset = Post.objects.filter(status=1)
-        post = get_object_or_404(queryset, id=id)
+        post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("-created_on")
         liked = False
-        if post.likes.filter(id=self.request.user.id).exists():
+        if post.likes.filter(id=request.user.id).exists():
             liked = True
 
         comment_form = CommentForm(data=request.POST)
@@ -72,14 +73,14 @@ class PostDetail(View):
 
 class PostLike(View):
 
-    def post(self, request, id, *args, **kwargs):
-        post = get_object_or_404(Post, id=id)
+    def post(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
         if post.likes.filter(id=request.user.id).exists():
             post.likes.remove(request.user)
         else:
             post.likes.add(request.user)
 
-        return HttpResponseRedirect(reverse('post_detail', args=[id]))
+        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
 class CreatePost(generic.ListView):
@@ -114,27 +115,33 @@ class ViewPost(generic.ListView):
     
 
 class UpdatePostView(View):
-    def get(self, request, id):
-        post = get_object_or_404(Post, id=id, author=request.user)
+    def get(self, request, slug):
+        post = get_object_or_404(Post, slug=slug, author=request.user)
         form = PostForm(instance=post)
         return render(request, 'update_post.html', {'form': form, 'post': post})
 
-    def post(self, request, id):
-        post = get_object_or_404(Post, id=id, author=request.user)
+    def post(self, request, slug):
+        post = get_object_or_404(Post, slug=slug, author=request.user)
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
             return redirect('view_post')
         return render(request, 'update_post.html', {'form': form, 'post': post})
 
+    def form_valid(self, form):
+        
+        form.instance.approved = False
+        form.instance.slug = slugify(form.instance.title)
+        return super().form_valid(form)
+
 
 class DeletePostView(View):
-    def get(self, request, id):
-        post = get_object_or_404(Post, id=id, author=request.user)
+    def get(self, request, slug):
+        post = get_object_or_404(Post, slug=slug, author=request.user)
         return render(request, 'delete_post_confirm.html', {'post': post})
 
-    def post(self, request, id):
-        post = get_object_or_404(Post, id=id, author=request.user)
+    def post(self, request, slug):
+        post = get_object_or_404(Post, slug=slug, author=request.user)
         post.delete()
         return redirect('view_post')
 
