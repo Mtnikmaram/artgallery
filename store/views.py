@@ -157,7 +157,16 @@ class EditProfileView(LoginRequiredMixin, View):
     def post(self, request):
         edit_profile_form = EditProfileForm(request.POST, instance=request.user)
         if edit_profile_form.is_valid():
+            first_name = edit_profile_form.cleaned_data.get('first_name')
+            last_name = edit_profile_form.cleaned_data.get('last_name')
+            email = edit_profile_form.cleaned_data.get('email')
+            
+            if not first_name or not last_name or not email:
+                messages.error(request, 'please fill all')
+                return redirect('show_profile')
+            
             edit_profile_form.save()
+            messages.success(request, 'your profile has been successfully edited')
             return redirect('home')
         return render(request, self.template_name, {'edit_profile_form': edit_profile_form})
 
