@@ -2,7 +2,7 @@
 <p> This is a art gallery blog from my wife's works . I am proud to announced that all of the paintings in this blog is painted by my wife and i hope you enjoy visiting the blog. </p>
 
 To see the live post click on the link : (https://art-gallery-dbb39ec83ba6.herokuapp.com/)
-![artgallery responsive design]()
+
 
 # Table of Content
 
