@@ -3,6 +3,7 @@
 
 To see the live post click on the link : (https://art-gallery-dbb39ec83ba6.herokuapp.com/)
 
+![Samiraroza artgallery responsive design](static/readme/responsive.png)
 
 # Table of Content
 
