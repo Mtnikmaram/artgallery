@@ -1,13 +1,14 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib import messages
 from django.views import generic, View
-from .forms import EditProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from .models import Post, User
+from .models import Post, User, CreateUser
 from django.utils.text import slugify
-from .forms import CommentForm, PostForm, EditProfileForm
+from .forms import CommentForm, PostForm, EditProfileForm, CustomSignupForm
+from django.contrib.auth import login
+from allauth.account.views import SignupView
 
 
 class PostList(generic.ListView):
@@ -169,7 +170,16 @@ class EditProfileView(LoginRequiredMixin, View):
             messages.success(request, 'your profile has been successfully edited')
             return redirect('home')
         return render(request, self.template_name, {'edit_profile_form': edit_profile_form})
+    
 
+class CustomSignupView(SignupView):
+    form_class = CustomSignupForm
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        login(self.request, self.user)
+        return response
+    
 
 @login_required
 def show_profile(request):

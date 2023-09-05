@@ -1,9 +1,11 @@
 from . import views
 from django.urls import path
+from .views import CustomSignupView
 
 urlpatterns = [
     path('', views.PostList.as_view(), name='home'),
     path('create_post/', views.CreatePostView.as_view(), name='create_post'),
+    path('accounts/signup/', CustomSignupView.as_view(), name='account_signup'),
     path('view_post/', views.ViewPost.as_view(), name='view_post'),
     path('update_post/<slug:slug>/', views.UpdatePostView.as_view(), name='update_post'),
     path('delete_post/<slug:slug>/', views.DeletePostView.as_view(), name='delete_post'),
