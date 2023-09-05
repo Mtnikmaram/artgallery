@@ -1,8 +1,8 @@
 <h1> SAMIRAROZA ART GALLERY </h1>
 <p> This is a art gallery blog from my wife's works . I am proud to announced that all of the paintings in this blog is painted by my wife and i hope you enjoy visiting the blog. </p>
-[View live website here]
 
-[View live website here] : (https://art-gallery-dbb39ec83ba6.herokuapp.com/)
+
+[View live website here](https://art-gallery-dbb39ec83ba6.herokuapp.com/)
 
 ![Samiraroza artgallery responsive design](static/readme/responsive.png)
 
