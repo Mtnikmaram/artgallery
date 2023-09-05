@@ -2,14 +2,6 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Comment, Post
 from django.core.validators import RegexValidator
-from allauth.account.forms import SignupForm
-
-
-class CustomSignupForm(SignupForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        del self.fields['email']
-
 
 
 class CommentForm(forms.ModelForm):
@@ -30,6 +22,7 @@ class PostForm(forms.ModelForm):
         }
 
     featured_image = forms.ImageField(required=True)
+
 
 
 class EditProfileForm(forms.ModelForm):
