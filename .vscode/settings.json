@@ -31,5 +31,10 @@
       "cloudinary",
       "mtnikmaram",
       "samiraroza"
-   ]
+   ],
+   "python.testing.pytestArgs": [
+      "store"
+   ],
+   "python.testing.unittestEnabled": false,
+   "python.testing.pytestEnabled": true
 }
