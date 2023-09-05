@@ -24,7 +24,6 @@ class PostForm(forms.ModelForm):
     featured_image = forms.ImageField(required=True)
 
 
-
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
