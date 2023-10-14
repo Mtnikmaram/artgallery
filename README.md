@@ -71,7 +71,7 @@ Below i have listed the user stories which is matters.
 * I can edit my comment so that I can change the content if needed 
 * I can remove my post so that I have full control of my post 
 * I can choose to see my own post so that I can find them easily
-* I can create a new post so that I can contribute to with new content to post Alliance 
+* I can create a new post so that I can contribute to with new content to post  
 * I can log out from the site so that I can feel safe that nobody can access my information 
 * I can create draft post so that I can finish writing the content later 
 * I can get visual feedback when interacting with the content so that I can be sure how I have interacted with the page 
