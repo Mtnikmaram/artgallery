@@ -36,6 +36,7 @@
     * [Libraries](<#libraries>)
 
 * [**Testing**](<#testing>)
+    * [Testing User Stories](<#testing-user-stories>)
     * [Code Validation](<#code-validation>)
     * [Additional Testing](<#additional-testing>)
     * [Known Bugs](<#known-bugs>)
@@ -89,7 +90,7 @@ Below i have listed the user stories which is matters.
 
 ## Site Structure
 
-The samiraroza artgallery is split up in two parts: **when the user is logged out** and **when the user is logged in**. Depending on login status different pages is available for the user. When the user is logged out the pages: *home* are avaliable. When the user is logged in *create a post*, *view my post* and *show profile page* are available.
+The samiraroza artgallery is split up in two parts: **when the user is logged out** and **when the user is logged in**. Depending on login status different pages is available for the user. When the user is logged out the pages: *home* are available. When the user is logged in *create a post*, *view my post* and *show profile page* are available.
 
 Read more about the different choices in the [Features](<#features>) section.
 
@@ -113,7 +114,7 @@ The navigation bar is very clean and straight forward. Depending if you  are log
 
 All of the links that are visible to a not logged in user plus the ones below.
 
-* Create a post - Lets the user create a new review.
+* Create a post - Lets the user create a new post.
 * View My post - Lists all post created by the logged in user.
 * Show Profile Page - Shows logged in users profile page.
 * Log Out - Logs out the user.
@@ -140,7 +141,7 @@ On this page the user can sign in to samiraroza artgallery
 ![Sign In](static/readme/accounts_login_.png)
 
 ### **Sign Out**
-When the user clicks sign out in the menu bar a confirmation page is being showed so that the user don't accidently sign out.
+When the user clicks sign out in the menu bar a confirmation page is being showed so that the user don't accidentally sign out.
 
 ![Sign Out](static/readme/accounts_logout_.png)
 
@@ -176,7 +177,7 @@ I will add a shopping basket and a credit card to the page.
 * [Cloudinary](https://cloudinary.com/) - A service that hosts all static files in the project.
 * [HTML Validation](https://validator.w3.org/) - Used to validate HTML code
 * [CSS Validation](https://jigsaw.w3.org/css-validator/) - Used to validate CSS code
-* [PEP8 Validation](http://pep8online.com/) - At the time for deploying this project the PEP8 Online Validaton service was offline, therefore not used.
+* [PEP8 Validation](http://pep8online.com/) - At the time for deploying this project the PEP8 Online Validation service was offline, therefore not used.
 * [JSHint Validation](https://jshint.com/) - Used to validate JavaScript code
 
 
@@ -199,18 +200,84 @@ The libraries used in this project are located in the requirements.txt file and 
 
 [Back to top](<#table-of-content>)
 
+# **Testing**
+
+## Testing User Stories
+
+* As a Site User : I can view a list of the post so that I can select one to read
+    
+* As a Site User : I can click on a specific post so that I can read it in detail
+   
+* As a Site User : I can like and unlike a post so that it is possible for me to interact with the post
+    * When the user is logged it is possible to click on a heart on the post detail page to like / unlike a post.
+
+* As a Site User : I can view the number of likes on each post so that I can see how popular a specific post is
+    * On the post detail page the user can see how many likes the specific post has.
+
+* As a Site User : I can contact post artgallery in an easy way so that I can interact with them if I have a need for it
+    * In the footer there is clear information about how to contact artgallery.
+
+* As a Site User : I can navigate easy on the site through paginated list of posts so that I feel comfortable using the site
+    * On the post pages the pagination is activated when there are more than 6 posts on a page.
+
+* As a Site User : I can view comments on a specific post so that I can read the conversations between different users on the site
+    * When the user clicks on a specific post the comment section can, in an easily way, be viewed.
+
+* As a Site User : I can sign up an account so that I can like and comment on posts, create a profile page, create own posts and edit / remove my posts
+    * In the navigation bar the user can click the Login / Sign up link to either login or sign up for a new account. When this is done the user can interact on the page as stated in the user story.
+
+* As a Site User : I can create a profile page so that other posters can read about who I am
+    * If a user is registered and logged in there is a 'Show Profile'-page in the navigation menu where the user can fill in profile details. The profile is shown for the site users in the about section.
+
+* As a Site User : I can comment on a post so that I can be involved in the conversation
+    * When the user is logged in they can write a comment on a specific post on the post detail page.
+
+* As a Site User : I can edit my comment so that I can change the content if needed
+    * When the user is logged in an edit button appears on the all comments that the specific user has written. When the user clicks the edit button they can change the content in the comment.
+
+* As a Site User : I can remove my post so that I have full control of my posts
+    * When the user is logged in a delete button appears on the all comments that the specific user has written. When the user clicks the delete button they get the option to delete the comment.
+
+* As a Site User : I can choose to see my own posts so that I can find them easily
+    * When a user is logged in they can choose to view their own posts through the link 'My posts'.
+
+* As a Site User : I can create a new post so that I can contribute to with new content to post 
+    * When a user is logged in they can create a new post through the 'Create New post'-link in the navigation bar.
+
+* As a Site User : I can log out from the site so that I can feel safe that nobody can access my information
+    * When the user is logged in it is possible to choose the 'Log Out'-option in the navigation menu.
+
+* As a Site User : I can create draft posts so that I can finish writing the content later
+    * When a logged in user creates a post they have the possibility to set the status on the post either on published or draft.
+
+* As a Site User : I can get visual feedback when interacting with the content so that I can be sure how I have interacted with the page
+    * When the user sign in, sign out, create / update / deletes posts and comments they always get a confirmation message to secure visual feedback.
+
+* As a Site Admin : I can log out from the site so that I can feel safe that nobody can access my information
+   * When the admin is logged in it is possible to choose the 'Log Out'-option in the navigation menu.
+
+* As a Site Admin : I can create, read, update and delete posts so that I can manage my post content
+   
+* As a Site Admin : I can approve posts so that I can secure high quality of the content
+    
+* As a Site Admin : I can approve and disapprove comments so that I can secure a safe environment for the Site Users
+    
+* As a Site Admin : I can create draft posts so that I can finish writing the content later
+
+* As a Site Admin : I can get visual feedback when interacting with the content so that I can be sure how I have interacted with the page
+   
 ## **Code Validation**
 
 The code on the 'samiraroza artgallery' site has been tested through W3C Markup Validation Service, W3C CSS Validation Service and JSHint. Errors were at first found on the site in the W3C Markup Validation Service but could quite easily be fixed (see bugs section). One error appeared as well in the W3C CSS Validation but that was connected to Font Awesome and not to the site code itself (see bugs section).
 
 ### **Markup Validation**
-After fixing the inital errors that W3C Markup Validation Service reported, no errors were returned.
+After fixing the initial errors that W3C Markup Validation Service reported, no errors were returned.
 
 
 ![HTML Result Home Page](static/readme/html%20validator.JPG)
 
 
-### **CSS Validaton**
+### **CSS Validation**
 When validating my own code the W3C CSS Validator reports no errors.
 
 
@@ -385,7 +452,7 @@ The project was deployed to [Heroku](https://www.heroku.com). To deploy, please 
 23. For Django to be able to understand how to use and where to store static files we need to add some extra rows to the settings.py file.
 
 
-24. Let's change the templates directory to TEMPLATES_DIR in the teamplates array.
+24. Let's change the templates directory to TEMPLATES_DIR in the templates array.
 
 
 25. To be able to get the application to work through Heroku we also need to add our Heroku app and localhost to which hosts that are allowed.

@@ -26,11 +26,32 @@
    "editor.defaultFormatter": "HookyQR.beautify",
    "python.linting.pycodestyleEnabled": true,
    "cSpell.words": [
+      "allauth",
       "artgallery",
+      "ASGI",
+      "asgiref",
       "blogpost",
       "cloudinary",
+      "collectstatic",
+      "creatpost",
+      "gunicorn",
+      "Ijege",
+      "isfile",
       "mtnikmaram",
-      "samiraroza"
+      "navafter",
+      "navebefore",
+      "oauthlib",
+      "Procfile",
+      "profilepage",
+      "psycopg",
+      "pycodestyle",
+      "runserver",
+      "samiraroza",
+      "signup",
+      "startapp",
+      "startproject",
+      "Viewpost",
+      "WSGI"
    ],
    "python.testing.pytestArgs": [
       "store"
