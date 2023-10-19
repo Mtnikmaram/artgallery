@@ -360,18 +360,18 @@ In addition to tests stated above I have performed a series of manual tests. Bel
  
 **Main Website - User Logged In**
 
- Typing in a incorrect URL on the page loads the 404 error page
- The user can add/edit/delete their post.
- The user can add/edit/delete their contact information.
- The user can add/edit/delete their profile information.
- The user is informed by a message appearing at the top of the screen about each add/edit/delete action.
+ * Typing in a incorrect URL on the page loads the 404 error page
+ * The user can add/edit/delete their post.
+ * The user can add/edit/delete their contact information.
+ * The user can add/edit/delete their profile information.
+ * The user is informed by a message appearing at the top of the screen about each add/edit/delete action.
  
 
 **Create A User Profile - User Logged Out**
 
- First name is required and has to contain must not contain numbers or special characters outside of the commonly used characters.
- Last name is required and has to contain must not contain numbers or special characters outside of the commonly used characters.
- The email is required and must be the email format.
+ * First name is required and has to contain must not contain numbers or special characters outside of the commonly used characters.
+ * Last name is required and has to contain must not contain numbers or special characters outside of the commonly used characters.
+ * The email is required and must be the email format.
 
 
 # **Known bugs**
