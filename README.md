@@ -39,7 +39,9 @@
     * [Testing User Stories](<#testing-user-stories>)
     * [Code Validation](<#code-validation>)
     * [Additional Testing](<#additional-testing>)
+    * [Manual Testing](<#manual-testing>)
     * [Known Bugs](<#known-bugs>)
+
 * [Deployment](<#deployment>)
 * [Credits](<#credits>)
 * [Acknowledgements](<#acknowledgements>)
@@ -340,12 +342,49 @@ Google Lighthouse in Chrome Developer Tools was used to test the application
 
 ![Lighthouse Index Result](static/readme/lighthouse.JPG)
 
+### Manual Testing
+
+In addition to tests stated above I have performed a series of manual tests. Below is a list of tests that have been conducted. These test are in addition to checking against acceptance criteria of each user story and fulfilling all of the relevant tasks.
+
+**Main Website - User Logged Out**
+
+ Typing in a incorrect URL on the page loads the 404 error page
+ Clicking the nav logo loads the home page
+ Clicking the Home button on the nav bar loads the home page
+ Clicking the Contact Us button on the nav bar lists takes the user to the contact us page
+ Clicking the Log In / Sign Up loads the sign in/sign up page
+ Clicking the Instagram link in the footer area opens Instagram in a new window
+ Clicking the YouTube link in the footer area opens YouTube in a new window
+ Clicking the LinkedIn link in the footer area opens LinkedIN in a new window
+ Clicking the Twitter link in the footer area opens Twitter in a new window
+ 
+**Main Website - User Logged In**
+
+ Typing in a incorrect URL on the page loads the 404 error page
+ The user can add/edit/delete their post.
+ The user can add/edit/delete their contact information.
+ The user can add/edit/delete their profile information.
+ The user is informed by a message appearing at the top of the screen about each add/edit/delete action.
+ 
+
+**Create A User Profile - User Logged Out**
+
+ First name is required and has to contain must not contain numbers or special characters outside of the commonly used characters.
+ Last name is required and has to contain must not contain numbers or special characters outside of the commonly used characters.
+ The email is required and must be the email format.
+
+
 # **Known bugs**
 No known bugs besides those in the fixed / unfixed bugs section.
 
 ### **Fixed Bugs**
 The most massive bug was error 404 , and error 500 
 This error was very hard to be fixed but by searching the web and seeing the other work i finally got the knowledge to fix the issues 
+    1-Crispy filter now working/not being applied: I had copied the allauth templates into templates/allauth/templates instead of templates/allauth, so the crispy filter and other changes could not be applied.
+    2-True or False: I changed values from false/true and back in some my models and the migrations failed
+    3-When the site was deployed, the css or the images would not show/be applied :I used absolute paths for the css file and the images/icons. I had to remove the first slash.
+    4-The favicon was not loading properly: I had to move the favicon.ico file to the static folder and update the path in base.html
+    5-Lines > 80, other minor errors: I had to cut then in pieces or leave then like that
 
 # **Deployment**
 
