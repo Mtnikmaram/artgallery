@@ -33,7 +33,9 @@ DEBUG = False
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 ALLOWED_HOSTS = ['127.0.0.1:8000']
 ALLOWED_HOSTS = ['art-gallery-dbb39ec83ba6.herokuapp.com', 'localhost', '127.0.0.1']
-
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+   ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 INSTALLED_APPS = [	
@@ -43,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'cloudinary_storage',	
-    'django.contrib.staticfiles',	
+    'django.contrib.staticfiles',
+    'django.contrib.sites',	
     'cloudinary',	
     'crispy_forms',	
     'allauth',	
